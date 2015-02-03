@@ -24,6 +24,6 @@ class Book(models.Model):
     authors=models.ManyToManyField(Author)
     publisher=models.ForeignKey(Publisher)
     publication_date=models.DateField()
-    def __str__(self)
+    def __str__(self):
         return self.authors
 # Create your models here.

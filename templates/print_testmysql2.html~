@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}print_testmysql2{%endblock%}
+<hr>
+{% block content %}
+<table stype="display:none;">
+<tbody>
+<tr align="center" valign="middle" bgcolor="red">
+    <th>ID</th><th>NAME</th><th>SEX</th><th>RESUME</th>
+</tr>
+{% for i in table_testmysql2 %}
+<tr align="center" valign="middle" bgcolor="green"> <th>{{ i.0}}</th><th>{{ i.1}}</th><th>{{ i.2}}</th><th>{{ i.3}}</th></tr>>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

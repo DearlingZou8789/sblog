@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import datetime
 from django.template import Context,Template
 from django.template.loader import get_template
+import MySQLdb
 def current_time(request):
     now=datetime.datetime.now()
     t=get_template('datetime.html')
@@ -20,3 +21,14 @@ def hours_ahead(request,offset):
     next_time=datetime.datetime.now()+datetime.timedelta(hours=hour_offset)
     #html="<html><body>In %s hour(s),it will be %s.</body></html>" % (offset,dt)
     return render_to_response('hours_ahead.html',locals())
+
+def print_testmysql2(request):
+    conn=MySQLdb.connect(user='root',passwd='tigerwith',db='testmysql',host='localhost')
+    cur=conn.cursor()
+    cur.execute('select * from testmysql2 order by id limit 0,100')
+    table_testmysql2=[row for row in cur.fetchall()]
+    conn.commit()
+    conn.close()
+    return render_to_response('print_testmysql2.html',{'table_testmysql2':table_testmysql2})
+
+
