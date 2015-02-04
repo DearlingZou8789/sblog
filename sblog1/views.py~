@@ -4,6 +4,8 @@ import datetime
 from django.template import Context,Template
 from django.template.loader import get_template
 import MySQLdb
+from django.db.models import Q
+from sblog1.models import Author,Book,Publisher
 def current_time(request):
     now=datetime.datetime.now()
     t=get_template('datetime.html')
@@ -31,4 +33,15 @@ def print_testmysql2(request):
     conn.close()
     return render_to_response('print_testmysql2.html',{'table_testmysql2':table_testmysql2})
 
+def search(request):
+    query=request.GET.get('q','')
+    if query:
+        qest=(
+                Q(title__icontains=query)|
+                Q(publisher_id__icontains=query)
+            )
+        results=Book.objects.filter(qest).distinct()
+    else:
+        results=[]
+    return render_to_response("books/search.html",{"results":results,"query":query})
 
