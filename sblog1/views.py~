@@ -1,11 +1,14 @@
 from django.shortcuts import render,render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 import datetime
-from django.template import Context,Template
+from django.template import Context,Template,RequestContext
 from django.template.loader import get_template
 import MySQLdb
 from django.db.models import Q
 from sblog1.models import Author,Book,Publisher
+from sblog1.forms import ContactForm
+from django.core.mail import send_mail
+
 def current_time(request):
     now=datetime.datetime.now()
     t=get_template('datetime.html')
@@ -37,11 +40,26 @@ def search(request):
     query=request.GET.get('q','')
     if query:
         qest=(
-                Q(title__icontains=query)|
-                Q(publisher_id__icontains=query)
+                Q(title=query)|
+                Q(publisher_id=query)
             )
         results=Book.objects.filter(qest).distinct()
     else:
         results=[]
     return render_to_response("books/search.html",{"results":results,"query":query})
 
+def contact(request):
+    if request.method == 'POST':
+        form=ContactForm(request.POST)
+    else:
+        form=ContactForm()
+    if form.is_valid():
+        topic = form.cleaned_data['topic']
+        message = form.cleaned_data['message']
+        sender = form.cleaned_data.get('sender','zmj27404@sina.cn')
+        #send_mail('Feedback from your site,topic:%s' % topic,message,sender,['478593278@qq.com'])
+        return HttpResponseRedirect('/contact/thanks/')
+    return render_to_response("contact.html",{'form':form},context_instance=RequestContext(request))
+
+def thanks(request):
+    return render_to_response("thanks.html")
