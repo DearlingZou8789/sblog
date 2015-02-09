@@ -13,6 +13,6 @@ urlpatterns = patterns('',
     url(r'^datetime/plus/(\d{1,2})/$', hours_ahead),
     url(r'^print/testmysql2/$', print_testmysql2),
     url(r'^search/$',search),
-    url(r'^contact/',contact),
+    url(r'^contact/$',contact),
     url(r'^contact/thanks/$',thanks),
 )

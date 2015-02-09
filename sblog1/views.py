@@ -63,3 +63,5 @@ def contact(request):
 
 def thanks(request):
     return render_to_response("thanks.html")
+
+
