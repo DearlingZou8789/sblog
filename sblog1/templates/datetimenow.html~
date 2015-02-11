@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load defined1 %}
+{% block content %}
+{{name|lower}}<br>#过滤器lower已经成功使用<br>
+{{value|cut:'i'}}<br>#过滤器cut已经成功启动,cut:"i"将i切掉了<br>
+It's time now {% do_current_time "%Y-%m-%d %H:%M:%S" %}
+<p>It's time now 2:{{ current_time }}</p>
+<br>
+<p>It's time now 3:{% do_current_time2 "%Y-%m-%d %H:%M:%S" as my_current_time %}{{my_current_time}}</p>
+{% upper %}
+<p>The Talk about How to use pytho web
+and the Population Web Frame is Django
+</p>
+{% endupper %}
+<br>
+<hr>
+{% endblock %}

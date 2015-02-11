@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from sblog1.views import current_time,current_time2,hours_ahead,print_testmysql2,search,contact,thanks
+from sblog1.views import (current_time,current_time2,hours_ahead,print_testmysql2,search,contact,thanks,datetimenow)
 
 urlpatterns = patterns('',
     # Examples:
@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^search/$',search),
     url(r'^contact/$',contact),
     url(r'^contact/thanks/$',thanks),
+    url(r'^datetimenow/$',datetimenow),
 )
