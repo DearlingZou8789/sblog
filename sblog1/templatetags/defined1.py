@@ -90,6 +90,7 @@ class UpperNode(template.Node):
 
 @register.inclusion_tag('books/show_books_for_author.html')
 def show_books_for_author(author):
-    books=Book.objects.filter(author_id=author.id)
+    books=author.book_set.all()
     return {'books':books}
-#in "datetimenow.html":{% show_books_for_author author %} 我有个疑问是关于show_books_for_author author中author的赋值问题,怎么赋值,怎么知道这个author有id属性呢! 
+#in "datetimenow.html":{% show_books_for_author author %} 我有个疑问是关于show_books_for_author author中author的赋值问题,怎么赋值,怎么知道这个author有id属性呢!
+#经过修改将语句改成了books=author.book_set.all(),Author对象有个book_set方法用于查找某个作者的书籍.同样的视图函数中传递的author=Author.objects.get(salutation='zmj'),获得该作者对象,然后再通过book_set查找到相应的书籍

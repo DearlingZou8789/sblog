@@ -1,5 +1,5 @@
 <ul>
     {% for book in books %}
-    <li>{{book}}</li>
+    <li>{{forloop.counter}}<b>:</b>{{book}}</li>
     {% endfor %}
 </ul>

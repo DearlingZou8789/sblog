@@ -14,4 +14,6 @@ and the Population Web Frame is Django
 {% endupper %}
 <br>
 <hr>
+{{author.salutation}}::{{author.first_name}}--{{author.last_name}}的书籍有:
+{% show_books_for_author author %}
 {% endblock %}

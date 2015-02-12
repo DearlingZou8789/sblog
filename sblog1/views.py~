@@ -22,7 +22,7 @@ def datetimenow(request):
     '使用自定义的current_time标签'
     name="Zmj's laster"
     value='listentome'
-    author=Q(salutation='zmj')
+    author=Author.objects.get(salutation='wjl')
 
     return render_to_response('datetimenow.html',{'name':name,'value':value,'author':author})
 
