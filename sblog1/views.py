@@ -23,7 +23,7 @@ def datetimenow(request):
     name="Zmj's laster"
     value='listentome'
     author=Author.objects.get(salutation='wjl')
-
+#author作为一个salutation='zmj'的作者对象传递进模板对象
     return render_to_response('datetimenow.html',{'name':name,'value':value,'author':author})
 
 
